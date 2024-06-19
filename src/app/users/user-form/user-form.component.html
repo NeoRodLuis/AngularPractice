@@ -1,0 +1,44 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2>{{ isEditMode ? 'Editar Usuario' : 'Agregar Usuario' }}</h2>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre:</label>
+          <input id="name" type="text" [(ngModel)]="user.name" name="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo:</label>
+          <input id="email" type="email" [(ngModel)]="user.email" name="email" class="form-control" required [readonly]="isEditMode">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña:</label>
+          <input id="password" type="password" [(ngModel)]="user.password" name="password" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
+          <input id="confirmPassword" type="password" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="role" class="form-label">Rol:</label>
+          <select id="role" [(ngModel)]="user.role" name="role" class="form-select" required>
+            <option value="Administrador">Administrador</option>
+            <option value="Recepcionista">Recepcionista</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="profileImage" class="form-label">Imagen de Perfil:</label>
+          <input id="profileImage" type="file" class="form-control" (change)="onFileChange($event)">
+        </div>
+        <div class="mb-3">
+          <label for="createdAt" class="form-label">Fecha de Alta:</label>
+          <input id="createdAt" type="text" [(ngModel)]="user.createdAt" name="createdAt" class="form-control" readonly>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">{{ isEditMode ? 'Actualizar' : 'Agregar' }}</button>
+        <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+      </form>
+    </div>
+  </div>
+</div>
